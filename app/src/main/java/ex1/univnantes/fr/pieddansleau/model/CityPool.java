@@ -1,4 +1,4 @@
-package ex1.univnantes.fr.pieddansleau;
+package ex1.univnantes.fr.pieddansleau.model;
 
 
 public class CityPool

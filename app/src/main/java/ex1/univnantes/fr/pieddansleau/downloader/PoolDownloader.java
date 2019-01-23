@@ -1,4 +1,4 @@
-package ex1.univnantes.fr.pieddansleau;
+package ex1.univnantes.fr.pieddansleau.downloader;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -14,6 +14,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import ex1.univnantes.fr.pieddansleau.MainActivity;
+import ex1.univnantes.fr.pieddansleau.model.CityPool;
 
 
 public class PoolDownloader extends AsyncTask< String, Void, ArrayList< CityPool > >

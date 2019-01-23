@@ -12,6 +12,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import ex1.univnantes.fr.pieddansleau.downloader.PoolDownloader;
+import ex1.univnantes.fr.pieddansleau.model.CityPool;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -52,7 +55,9 @@ public class MainActivity extends AppCompatActivity
 		
 		CityPool selectedPool = ( (PoolAdapter.ViewHolder) mainList.getChildViewHolder( view ) ).getPool();
 		
+		intent.putExtra( "poolId", selectedPool.getId() );
 		intent.putExtra( "fullname", selectedPool.getNom_complet() );
+		intent.putExtra( "shortname", selectedPool.getNom_usuel() );
 		intent.putExtra( "infos", selectedPool.getInfos() );
 		intent.putExtra( "location", selectedPool.getAdresse() );
 		intent.putExtra( "rating", selectedPool.getRating() );

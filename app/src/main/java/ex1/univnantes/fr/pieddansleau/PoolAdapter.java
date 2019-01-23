@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ex1.univnantes.fr.pieddansleau.model.CityPool;
+
 
 class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 {
