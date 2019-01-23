@@ -3,10 +3,7 @@ package ex1.univnantes.fr.pieddansleau;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class PoolActivity extends AppCompatActivity

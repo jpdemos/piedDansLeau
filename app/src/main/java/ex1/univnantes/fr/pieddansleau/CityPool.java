@@ -3,13 +3,13 @@ package ex1.univnantes.fr.pieddansleau;
 
 public class CityPool
 {
-	private String id;
-	private String web;
-	private String adresse;
-	private String nom_complet;
-	private String nom_usuel;
-	private String tel;
-	private String infos;
+	private String  id;
+	private String  web;
+	private String  adresse;
+	private String  nom_complet;
+	private String  nom_usuel;
+	private String  tel;
+	private String  infos;
 	private boolean plongeoir;
 	private boolean pataugeoire;
 	private boolean solarium;
