@@ -76,10 +76,14 @@ public class PoolDownloader extends AsyncTask< String, Void, ArrayList< CityPool
 				pool.setNom_usuel( fields.getString( "nom_usuel" ) );
 				pool.setInfos( fields.optString( "infos_complementaires" ) );
 				pool.setAdresse( fields.getString( "adresse" ) );
-				pool.setWeb( fields.optString( "web", "NONE" ) );
-				pool.setPataugeoire( fields.optString( "pataugeoire", "" ) == "" ? false : true );
-				pool.setSolarium( fields.optString( "solarium", "" ) == "" ? false : true );
-				pool.setTel( fields.optString( "tel", "" ) );
+				pool.setWeb( fields.optString( "web", "Aucun site internet" ) );
+				pool.setTel( fields.optString( "tel", "Aucun numero de téléphone" ) );
+				
+				pool.setPataugeoire( fields.optString( "pataugeoire", "" ).equals( "OUI" ) );
+				pool.setSolarium( fields.optString( "solarium", "" ).equals( "OUI" ) );
+				pool.setAccess_handicap( fields.optString( "accessibilite_handicap", "" ).equals( "OUI" ) );
+				pool.setHasBassinSportif( fields.optString( "bassin_sportif", "" ).equals( "OUI" ) );
+				pool.setPlongeoir( fields.optString( "plongeoir", "" ).equals( "OUI" ) );
 				
 				fetchedData.add( pool );
 			}

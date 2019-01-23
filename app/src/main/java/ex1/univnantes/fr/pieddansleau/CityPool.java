@@ -13,6 +13,8 @@ public class CityPool
 	private boolean plongeoir;
 	private boolean pataugeoire;
 	private boolean solarium;
+	private boolean access_handicap;
+	private boolean hasBassinSportif;
 	
 	private int rating;
 	
@@ -128,5 +130,25 @@ public class CityPool
 	public void setInfos( String infos )
 	{
 		this.infos = infos;
+	}
+	
+	public boolean isAccess_handicap()
+	{
+		return access_handicap;
+	}
+	
+	public void setAccess_handicap( boolean access_handicap )
+	{
+		this.access_handicap = access_handicap;
+	}
+	
+	public boolean isHasBassinSportif()
+	{
+		return hasBassinSportif;
+	}
+	
+	public void setHasBassinSportif( boolean hasBassinSportif )
+	{
+		this.hasBassinSportif = hasBassinSportif;
 	}
 }

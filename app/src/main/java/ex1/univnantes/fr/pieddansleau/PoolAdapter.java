@@ -2,10 +2,10 @@ package ex1.univnantes.fr.pieddansleau;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -25,6 +25,9 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		protected TextView  description;
 		protected RatingBar rating;
 		protected TextView  phone;
+		protected ImageView tobo;
+		protected ImageView handicap;
+		protected ImageView bassSportif;
 		
 		public ViewHolder( View itemView )
 		{
@@ -34,6 +37,10 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 			description = itemView.findViewById( R.id.poolDesc );
 			rating = itemView.findViewById( R.id.poolRating );
 			phone = itemView.findViewById( R.id.poolPhone );
+			
+			tobo = itemView.findViewById( R.id.toboView );
+			handicap = itemView.findViewById( R.id.handiView );
+			bassSportif = itemView.findViewById( R.id.bassSportifView );
 		}
 		
 		public CityPool getPool()
@@ -68,16 +75,14 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		CityPool pool = pools.get( i );
 		viewHolder.setPool( pool );
 		
-		Log.i( "citypools", pool.getNom_usuel() );
-		Log.i( "citypools", pool.getAdresse() );
-		Log.i( "citypools", "" + pool.getRating() );
-		Log.i( "citypools", pool.getTel() );
-		
 		viewHolder.title.setText( pool.getNom_usuel() );
 		viewHolder.description.setText( pool.getAdresse() );
 		viewHolder.rating.setRating( pool.getRating() );
 		viewHolder.phone.setText( pool.getTel() );
 		
+		viewHolder.tobo.setVisibility( pool.isPlongeoir() ? View.VISIBLE : View.INVISIBLE );
+		viewHolder.handicap.setVisibility( pool.isAccess_handicap() ? View.VISIBLE : View.INVISIBLE );
+		viewHolder.bassSportif.setVisibility( pool.isHasBassinSportif() ? View.VISIBLE : View.INVISIBLE );
 	}
 	
 	@Override
