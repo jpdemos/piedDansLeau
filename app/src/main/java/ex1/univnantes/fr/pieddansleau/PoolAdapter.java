@@ -7,10 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ex1.univnantes.fr.pieddansleau.model.CityPool;
@@ -18,7 +24,12 @@ import ex1.univnantes.fr.pieddansleau.model.CityPool;
 
 class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 {
-	private List< CityPool > pools;
+	List< CityPool > pools;
+
+
+
+
+
 	
 	private MainActivity      screen;
 	private SharedPreferences preferences;
@@ -35,6 +46,9 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		protected ImageView tobo;
 		protected ImageView handicap;
 		protected ImageView bassSportif;
+		//protected SearchView rech;
+		protected EditText edtxt;
+
 		
 		public ViewHolder( View itemView )
 		{
@@ -48,6 +62,9 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 			tobo = itemView.findViewById( R.id.toboView );
 			handicap = itemView.findViewById( R.id.handiView );
 			bassSportif = itemView.findViewById( R.id.bassSportifView );
+
+			edtxt = itemView.findViewById(R.id.search);
+			//rech = itemView.findViewById(R.id.recherche);
 		}
 		
 		public CityPool getPool()
@@ -94,6 +111,21 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		viewHolder.tobo.setVisibility( pool.isPlongeoir() ? View.VISIBLE : View.INVISIBLE );
 		viewHolder.handicap.setVisibility( pool.isAccess_handicap() ? View.VISIBLE : View.INVISIBLE );
 		viewHolder.bassSportif.setVisibility( pool.isHasBassinSportif() ? View.VISIBLE : View.INVISIBLE );
+/*
+		viewHolder.rech.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String s) {
+				getFilter();
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String s) {
+				getFilter();
+				return true;
+			}
+		});
+*/
 	}
 	
 	@Override
@@ -101,5 +133,11 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 	{
 		return pools.size();
 	}
+
+
+
+
+
+
 	
 }
