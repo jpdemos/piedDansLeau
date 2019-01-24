@@ -1,5 +1,7 @@
 package ex1.univnantes.fr.pieddansleau;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +19,9 @@ import ex1.univnantes.fr.pieddansleau.model.CityPool;
 class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 {
 	private List< CityPool > pools;
+	
+	private MainActivity      screen;
+	private SharedPreferences preferences;
 	
 	public class ViewHolder extends RecyclerView.ViewHolder
 	{
@@ -56,8 +61,9 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		}
 	}
 	
-	public PoolAdapter( List< CityPool > pools )
+	public PoolAdapter( MainActivity screen, List< CityPool > pools )
 	{
+		this.screen = screen;
 		this.pools = pools;
 	}
 	
@@ -77,9 +83,12 @@ class PoolAdapter extends RecyclerView.Adapter< PoolAdapter.ViewHolder >
 		CityPool pool = pools.get( i );
 		viewHolder.setPool( pool );
 		
+		Context context = screen.getApplicationContext();
+		this.preferences = context.getSharedPreferences( pool.getId() + "_savedData", context.MODE_PRIVATE );
+		
 		viewHolder.title.setText( pool.getNom_usuel() );
 		viewHolder.description.setText( pool.getAdresse() );
-		viewHolder.rating.setRating( pool.getRating() );
+		viewHolder.rating.setRating( this.preferences.getFloat( "rating", 0 ) );
 		viewHolder.phone.setText( pool.getTel() );
 		
 		viewHolder.tobo.setVisibility( pool.isPlongeoir() ? View.VISIBLE : View.INVISIBLE );

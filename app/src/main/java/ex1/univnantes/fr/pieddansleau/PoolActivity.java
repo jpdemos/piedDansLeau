@@ -1,12 +1,15 @@
 package ex1.univnantes.fr.pieddansleau;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,15 +21,18 @@ import ex1.univnantes.fr.pieddansleau.downloader.PoolScheduleDownloader;
 import ex1.univnantes.fr.pieddansleau.model.PoolSchedule;
 
 
-public class PoolActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+public class PoolActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RatingBar.OnRatingBarChangeListener
 {
-	private TextView title;
-	private TextView description;
-	private TextView location;
-	private TextView web;
-	private TextView phone;
-	private Spinner  periodsSpinner;
-	private TextView periodTimeSpan;
+	private TextView          title;
+	private TextView          description;
+	private TextView          location;
+	private TextView          web;
+	private TextView          phone;
+	private Spinner           periodsSpinner;
+	private TextView          periodTimeSpan;
+	private SharedPreferences preferences;
+	private CheckBox          visited;
+	private RatingBar         rating;
 	
 	private HashMap< String, TextView > periodWeekDays;
 	
@@ -39,8 +45,19 @@ public class PoolActivity extends AppCompatActivity implements AdapterView.OnIte
 		setContentView( R.layout.pool_details );
 		Intent intent = getIntent();
 		
+		String poolId = intent.getStringExtra( "poolId" );
+		
+		this.preferences = this.getApplicationContext().getSharedPreferences( poolId + "_savedData", MODE_PRIVATE );
 		
 		getSupportActionBar().setTitle( intent.getStringExtra( "shortname" ) );
+		
+		visited = findViewById( R.id.visited );
+		visited.setChecked( this.preferences.getBoolean( "visited", false ) );
+		
+		rating = findViewById( R.id.rating );
+		rating.setRating( this.preferences.getFloat( "rating", 0 ) );
+		
+		rating.setOnRatingBarChangeListener( this );
 		
 		title = findViewById( R.id.title );
 		title.setText( intent.getStringExtra( "fullname" ) );
@@ -72,12 +89,7 @@ public class PoolActivity extends AppCompatActivity implements AdapterView.OnIte
 		
 		periodTimeSpan = findViewById( R.id.periodTimeSpan );
 		
-		new PoolScheduleDownloader( this ).execute( intent.getStringExtra( "poolId" ) );
-		
-		//intent.getStringExtra( "rating"  );
-		//intent.getStringExtra( "hasPataugoire" );
-		//intent.getStringExtra( "hasPlongeoir" );
-		
+		new PoolScheduleDownloader( this ).execute( poolId );
 	}
 	
 	@Override
@@ -194,5 +206,22 @@ public class PoolActivity extends AppCompatActivity implements AdapterView.OnIte
 		intent.setData( Uri.parse( "tel:" + phone.getText().toString() ) );
 		
 		startActivity( intent );
+	}
+	
+	public void onVisitedStateChanged( View view )
+	{
+		SharedPreferences.Editor editor = this.preferences.edit();
+		editor.putBoolean( "visited", this.visited.isChecked() );
+		
+		editor.commit();
+	}
+	
+	@Override
+	public void onRatingChanged( RatingBar ratingBar, float rating, boolean fromUser )
+	{
+		SharedPreferences.Editor editor = this.preferences.edit();
+		editor.putFloat( "rating", rating );
+		
+		editor.commit();
 	}
 }

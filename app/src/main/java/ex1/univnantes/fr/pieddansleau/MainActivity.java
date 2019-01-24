@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 		
 		pools = new ArrayList<>();
 		
-		mainList.setAdapter( new PoolAdapter( pools ) );
+		mainList.setAdapter( new PoolAdapter( this, pools ) );
 		new PoolDownloader( this ).execute();
 	}
 	
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 	protected void onStart()
 	{
 		super.onStart();
+		this.mainList.getAdapter().notifyDataSetChanged();
 	}
 	
 	public void populate( List< CityPool > data )
